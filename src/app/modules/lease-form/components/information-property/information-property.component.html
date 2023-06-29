@@ -1,0 +1,128 @@
+<div
+  [formGroup]="parentLeaseForm"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 rounded-lg bg-white mt-4 p-3">
+  <div class="form-control m-2">
+    <label for="deposits-input" class="label-text">¿Cuantos depositos? *</label>
+    <input
+      (change)="onChangeDeposits()"
+      formControlName="deposits"
+      id="deposits-input"
+      type="text"
+      pInputText
+      placeholder="Cantidad de depositos"
+      required />
+    <div *ngIf="deposits?.errors && deposits?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="deposits?.hasError('required')">
+        La cantidad de depositos es requerida
+      </label>
+    </div>
+  </div>
+  <!-- <ng-container formArrayName="depositsSpaces">
+    <ng-container
+      *ngFor="
+        let space of getForm('depositsSpaces', parentLeaseForm).controls;
+        index as formChild
+      ">
+      <div [formGroupName]="formChild">
+        <div *ngIf="totalDeposits >= 1" class="form-control m-2">
+          <label for="nDeposits-input" class="label-text"
+            >N° de deposito {{ formChild + 1 }} *</label
+          >
+          <input
+            formControlName="nameDeposit"
+            id="nDeposits-input"
+            type="text"
+            pInputText
+            placeholder="Número de deposito" />
+        </div>
+      </div>
+    </ng-container>
+  </ng-container> -->
+</div>
+<!-- <pre>{{ parentLeaseForm.value | json }}</pre> -->
+<div class="divider"></div>
+<div
+  [formGroup]="parentLeaseForm"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 rounded-lg bg-white mt-4 p-3">
+  <div class="form-control m-2">
+    <label for="garages-input" class="label-text">¿Cuantos de garajes?</label>
+    <input
+      formControlName="garages"
+      id="garages-input"
+      type="text"
+      pInputText
+      placeholder="Número de garajes"
+      required />
+  </div>
+  <!-- <ng-container formArrayName="garagesSpaces">
+    <ng-container
+      *ngFor="
+        let space of getForm('garagesSpaces', parentLeaseForm).controls;
+        index as formChild
+      ">
+      <div [formGroupName]="formChild">
+        <div *ngIf="totalGarages >= 1" class="form-control m-2">
+          <label for="nDeposits-input" class="label-text"
+            >N° de garaje {{ formChild + 1 }} *</label
+          >
+          <input
+            formControlName="nameGarage"
+            id="nGarages-input"
+            type="text"
+            pInputText
+            placeholder="Número de garage" />
+        </div>
+      </div>
+    </ng-container>
+  </ng-container> -->
+</div>
+
+<div class="divider"></div>
+
+<div
+  [formGroup]="parentLeaseForm"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 rounded-lg bg-white mt-4 p-3">
+  <div class="form-control m-2">
+    <label for="bedrooms-input" class="label-text"
+      >¿Cuantas habitaciones?</label
+    >
+    <input
+      formControlName="bedrooms"
+      id="bedrooms-input"
+      type="text"
+      pInputText
+      placeholder="Número de habitaciones"
+      required />
+  </div>
+  <div class="form-control m-2">
+    <label for="bathrooms-input" class="label-text">¿Cuantos baños?</label>
+    <input
+      formControlName="bathrooms"
+      id="bathrooms-input"
+      type="text"
+      pInputText
+      placeholder="Número de baños"
+      required />
+  </div>
+  <div class="form-control m-2">
+    <label for="balcony-input" class="label-text">¿Tiene balcón?</label>
+    <input
+      formControlName="balcony"
+      id="balcony-input"
+      type="text"
+      pInputText
+      placeholder="Número de depositos"
+      required />
+  </div>
+  <!-- <div class="form-control m-2">
+    <label for="balcony-input" class="label-text"
+      >Escoge la forma del inmueble
+    </label>
+    <div *ngFor="let category of categories" class="field-checkbox">
+      <p-radioButton [value]="category"></p-radioButton>
+      <label [for]="category.value">{{ category.label }}</label>
+    </div>
+  </div> -->
+</div>

@@ -1,0 +1,58 @@
+<ng-container [formGroup]="formParent">
+  <td class="">
+    <p-dropdown
+      [options]="descriptions"
+      formControlName="description"
+      optionLabel="value"
+      optionValue="value"
+      [attr.disabled]="formParent.get('description')?.value.disabled"
+      [style]="{ minWidth: '100%' }">
+    </p-dropdown>
+  </td>
+  <td class="" [style]="{ maxWidth: '25%' }">
+    <input
+      formControlName="cant"
+      id="cant-input"
+      type="text"
+      pInputText
+      placeholder="Cantidad"
+      [style]="{ maxWidth: '25%' }" />
+  </td>
+  <td class="text-center">
+    <input
+      formControlName="material"
+      id="material-input"
+      type="text"
+      pInputText
+      placeholder="Tipo de Material" />
+  </td>
+  <!-- TODO: use getForm with received and delivered -->
+  <ng-container [formGroup]="getForm('delivered', formTestDeliverd)">
+    <td class="text-center" *ngFor="let state of states">
+      <input
+        class="radio radio-primary radio-sm"
+        placeholder="radio"
+        type="radio"
+        formControlName="state"
+        value="{{ state.key }}" />
+    </td>
+    <td class="text-center">
+      <textarea
+        pInputTextarea
+        formControlName="comments"
+        placeholder="Ingrese aquí las observaciones de entrega"></textarea>
+    </td>
+  </ng-container>
+
+  <!-- <td class="text-center" *ngFor="let state of states">
+        <input class="radio radio-primary radio-sm" type="radio" formControlName="stateLessor" value="{{ state.key }}" />
+    </td>
+    <td class="text-center">
+        <textarea pInputTextarea formControlName="obsLessor" placeholder="Ingrese aquí las observaciones de recibido"></textarea>
+    </td> -->
+  <!-- <td class="text-center">
+        <button class="btn btn-primary btn-outline" (click)="removeFeaturesOfSpaces()">
+            <ng-icon name="hero-x"></ng-icon>
+        </button>
+    </td> -->
+</ng-container>

@@ -1,0 +1,151 @@
+<div
+  [formGroup]="parentLeaseForm"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-8 px-3 rounded-lg bg-white">
+  <div class="form-control m-2">
+    <label for="contractNumber-input" class="label-text"
+      >N° de Contrato *</label
+    >
+    <p-dropdown
+      placeholder="Seleccione un Codigo"
+      (onChange)="onSelectPropertyCode()"
+      [options]="properties"
+      [filter]="true"
+      filterBy="codigo"
+      [showClear]="true"
+      formControlName="contractNumber"
+      optionLabel="codigo"
+      optionValue="codigo"
+      [style]="{ minWidth: '100%' }">
+    </p-dropdown>
+    <div *ngIf="contractNumber?.errors && contractNumber?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="contractNumber?.hasError('required')">
+        El codigo del inmueble es requerido
+      </label>
+    </div>
+  </div>
+
+  <div class="form-control m-2">
+    <label for="date-lessee-input" class="label-text">
+      Fecha de entrega al Arrendatario *
+    </label>
+    <p-calendar
+      dateFormat="dd/mm/yy"
+      formControlName="dateLessee"
+      placeholder="Fecha de entrega al Arrendatario"
+      inputId="date-lessee-input"
+      [style]="{ minWidth: '100%' }">
+    </p-calendar>
+    <div *ngIf="dateLessee?.errors && dateLessee?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="dateLessee?.hasError('required')">
+        La fecha de entrega es requerida
+      </label>
+    </div>
+  </div>
+
+  <div class="form-control m-2">
+    <label for="date-lessor-input" class="label-text">
+      Fecha de recibido por el Arrendador *
+    </label>
+    <p-calendar
+      [minDate]="getDateLessee"
+      dateFormat="dd/mm/yy"
+      formControlName="dateLessor"
+      placeholder="Fecha de recibido por el Arrendador"
+      inputId="date-lessor-input"
+      [style]="{ minWidth: '100%' }">
+    </p-calendar>
+    <div *ngIf="dateLessor?.errors && dateLessor?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="dateLessor?.hasError('required')">
+        La fecha de recibido es requerida
+      </label>
+    </div>
+  </div>
+
+  <div class="form-control m-2">
+    <label for="lessee-input" class="label-text">Arrendatario *</label>
+    <input
+      formControlName="lessee"
+      id="lessee-input"
+      type="text"
+      pInputText
+      placeholder="Nombre del Arrendatario" />
+    <div *ngIf="lessee?.errors && lessee?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="lessee?.hasError('required')">
+        El nombre del arrendatario es requerido
+      </label>
+    </div>
+  </div>
+
+  <div class="form-control m-2">
+    <label for="lessor-input" class="label-text">Arrendador </label>
+    <input
+      formControlName="lessor"
+      id="lessor-input"
+      type="text"
+      pInputText
+      placeholder="Nombre del Arrendador" />
+  </div>
+
+  <div class="form-control m-2">
+    <label for="insuranceCompany-input" class="label-text"
+      >Aseguradoras *</label
+    >
+    <p-dropdown
+      [options]="insurers"
+      [required]="true"
+      formControlName="insuranceCompany"
+      id="insuranceCompany-input"
+      placeholder="Nombre de la Aseguradora"
+      optionLabel="label"
+      optionValue="value"
+      [style]="{ minWidth: '100%' }">
+    </p-dropdown>
+  </div>
+  <div
+    *ngIf="parentLeaseForm.get('insuranceCompany')?.value === 0"
+    class="form-control m-2">
+    <label for="insuranceCompany-input" class="label-text"
+      >Nombre de otra Aseguradora *</label
+    >
+    <input
+      type="text"
+      pInputText
+      placeholder="Nombre de la Aseguradora"
+      formControlName="nameInsuranceCompany" />
+    <div *ngIf="nameInsuranceCompany?.errors && nameInsuranceCompany?.dirty">
+      <label
+        class="label-text text-red-600"
+        *ngIf="nameInsuranceCompany?.hasError('required')">
+        El nombre de la otra Aseguradora es requerido
+      </label>
+    </div>
+  </div>
+
+  <div class="form-control m-2">
+    <label for="address-input" class="label-text">Dirección</label>
+    <input
+      formControlName="address"
+      id="address-input"
+      type="text"
+      pInputText
+      placeholder="Dirección del Inmueble" />
+  </div>
+
+  <div class="form-control m-2">
+    <label for="typeProperty-input" class="label-text">Tipo de Inmueble</label>
+    <input
+      formControlName="typeProperty"
+      id="typeProperty-input"
+      type="text"
+      pInputText
+      placeholder="Tipo de Inmueble" />
+  </div>
+</div>

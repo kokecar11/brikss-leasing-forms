@@ -1,0 +1,74 @@
+{
+    "contractNumber":"916",
+    "dateLessee":"2022-09-07T05:00:00.000Z",
+    "dateLessor":"2022-09-28T05:00:00.000Z",
+    "lessee":"Koke",
+    "lessor":"BRIKSS S.A.S",
+    "insuranceCompany":2,
+    "nameInsuranceCompany":"",
+    "address":"KR 9bis # 96 - 50\tAPTO\t502",
+    "typeProperty":"Apartamento",
+    "rooms":3,
+    "bathrooms":2,
+    "garages":3,
+    "deposits":"1",
+    "balcony":"No",
+    "terrace":false,
+    "spaces":[
+        {
+            "name":"Entrada principal",
+            "features":[
+                {
+                    "description":"Cerradura puerta",
+                    "cant":"1",
+                    "typeMaterial":"Madera",
+                    "states": [
+                        {
+                            "typeState":"Entrega",
+                            "state":"B",
+                            "obs":"Alguna observación"
+                        },
+                        {
+                            "typeState":"Recibido",
+                            "state":"R",
+                            "obs":"Dañado"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name":"Habitación principal",
+            "features":[
+                {
+                    "description":"Puerta",
+                    "cant":"1",
+                    "typeMaterial":"Madera",
+                    "states":[
+                        {
+                            "typeState":"Entrega",
+                            "state":"B",
+                            "obs":""
+                        },
+                        {   
+                            "typeState":"Recibido",
+                            "state":"R",
+                            "obs":"Está dañado"
+                        }
+                    ]
+                    
+                }
+            ]
+        },
+        {
+            "name":"Garaje 1",
+            "features":[
+
+            ]
+        },
+        {
+            "name": "Deposito 1",
+            "features": []
+        }
+    ]
+}

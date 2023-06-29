@@ -1,0 +1,138 @@
+<div class="rounded-lg shadow-lg m-2 bg-slate-200 p-4">
+  <form [formGroup]="parentLeaseForm">
+    <app-information-lease
+      [properties]="properties"
+      [parentLeaseForm]="parentLeaseForm">
+    </app-information-lease>
+
+    <div class="divider"></div>
+
+    <app-information-property [parentLeaseForm]="parentLeaseForm">
+    </app-information-property>
+
+    <div class="divider"></div>
+
+    <div class="grid grid-cols-1 rounnded-lg bg-white mt-2">
+      <div *ngIf="!featuresFormLesseeCreated" class="form-control my-4 mx-auto">
+        <button
+          class="btn btn-accent btn-outline"
+          [disabled]="!parentLeaseForm.valid"
+          (click)="onConfirm()">
+          Generar Inventario de Entrega
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="isDisabled"
+      class="rounded-lg bg-white mt-2 p-3"
+      formArrayName="spaces">
+      <p-tabView [(activeIndex)]="indexOfTabView" [scrollable]="true">
+        <p-tabPanel
+          *ngFor="
+            let space of getForm('spaces', parentLeaseForm).controls;
+            index as formChild
+          "
+          [header]="spaces[formChild]"
+          [disabled]="!getForm('features', space).valid">
+          <div class="my-2" [formGroupName]="formChild">
+            <div formArrayName="features" class="px-2">
+              <table class="table table-zebra table-compact w-full">
+                <thead>
+                  <tr>
+                    <th rowspan="2" class="text-center">Descripcion</th>
+                    <th rowspan="2" class="">Cantidad</th>
+                    <th rowspan="2" class="text-center">Tipo de Material</th>
+                    <th colspan="3" class="text-center">Estado de Entrega</th>
+                    <th rowspan="2" class="text-center">Observaciones</th>
+                  </tr>
+                  <tr>
+                    <td class="text-center">Bueno</td>
+                    <td class="text-center">Regular</td>
+                    <td class="text-center">Malo</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    app-row-questions
+                    *ngFor="
+                      let feature of getForm('features', space).controls;
+                      index as formFeat
+                    "
+                    [formParent]="feature"
+                    [formGroupName]="formFeat"
+                    [formTestDeliverd]="getForm('states', feature)"
+                    [descriptions]="descTest[formChild].descs"
+                    [index]="formFeat"></tr>
+                </tbody>
+              </table>
+              <div class="mt-4 flex">
+                <div class="flex-1">
+                  <button
+                    class="btn btn-primary flex-1"
+                    (click)="openPrev()"
+                    [ngClass]="{ hidden: formChild === 0 }">
+                    Atras
+                  </button>
+                  <button
+                    class="btn btn-primary btn-outline mx-1"
+                    [disabled]="!getForm('features', space).valid"
+                    (click)="openNext()"
+                    [ngClass]="{ hidden: indexOfTabView === spaces.length }">
+                    Siguiente
+                  </button>
+                </div>
+                <div class="">
+                  <button
+                    class="btn btn-primary btn-outline mx-1"
+                    (click)="addFeaturesOfSpace(space)">
+                    Agregar Caracteristica
+                  </button>
+                  <button
+                    class="btn btn-primary btn-outline mx-1"
+                    (click)="onConfirm()"
+                    [ngClass]="{ hidden: !parentLeaseForm.valid }">
+                    Guardar y enviar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </p-tabPanel>
+      </p-tabView>
+    </div>
+    <pre>{{ parentLeaseForm.value | json }}</pre>
+  </form>
+  <p-dialog
+    [header]="titleOfMessage"
+    [(visible)]="isDisplayedMessage"
+    [draggable]="false"
+    [modal]="true"
+    [style]="{ width: '60vw' }">
+    {{ descOfMessage }}
+    <ng-template pTemplate="footer">
+      <button class="btn btn-primary btn-outline">
+        <ng-icon
+          class="mr-1 my-auto"
+          size="16"
+          name="ionLogoWhatsapp"></ng-icon>
+        Enviar
+      </button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog
+    #cd
+    header="Confirmación"
+    icon="pi pi-exclamation-triangle"
+    acceptLabel="Si">
+    <ng-template pTemplate="footer">
+      <button class="btn btn-primary btn-outline" (click)="cd.reject()">
+        No <ng-icon class="ml-1" size="18" name="heroXMark"></ng-icon>
+      </button>
+      <button class="btn btn-primary" (click)="cd.accept()">
+        Si <ng-icon class="ml-1" size="18" name="heroCheck"></ng-icon>
+      </button>
+    </ng-template>
+  </p-confirmDialog>
+</div>
